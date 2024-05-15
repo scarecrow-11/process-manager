@@ -55,6 +55,35 @@ export class ProcessService {
         }
     }
 
+    async getAll() {
+        const processes = await this.prismaService.process.findMany()
+        if (!processes.length) {
+            return {
+                messsage: 'No processes found.'
+            }
+        }
+        return processes
+    }
+
+    async getSingle(pid: string) {
+        const process = await this.prismaService.process.findUnique({
+            where: {
+                pid
+            },
+            include: {
+                processLogs: true
+            }
+        })
+
+        if (!process) {
+            return {
+                message: 'Process not found.'
+            }
+        }
+
+        return process
+    }
+
     private async createProcessCronJob(process: Process, schedule: string) {
         try {
             const job = new CronJob(schedule, async () => {
