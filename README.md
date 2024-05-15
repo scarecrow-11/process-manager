@@ -24,12 +24,25 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Process manager backend repository.
+
+## Pre-requisites
+
+Must have PostgreSQL installed.
 
 ## Installation
 
 ```bash
 $ npm install
+```
+
+## Database Migration
+```bash
+# migration
+$ npx prisma migrate dev
+
+# type generation
+$ npx prisma generate
 ```
 
 ## Running the app
